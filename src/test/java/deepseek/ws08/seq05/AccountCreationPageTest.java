@@ -1,0 +1,85 @@
+package deepseek.ws08.seq05;
+
+import org.junit.jupiter.api.*;
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import java.time.Duration;
+
+public class AccountCreationPageTest {
+    private WebDriver driver;
+    private WebDriverWait wait;
+    private static final String ACCOUNT_CREATION_URL = "https://wavingtest.github.io/system-healing-test/account.html";
+
+    @BeforeEach
+    public void setUp() {
+        driver = new ChromeDriver();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        driver.manage().window().maximize();
+        driver.get(ACCOUNT_CREATION_URL);
+    }
+
+    @Test
+    public void testPageTitle() {
+        Assertions.assertEquals("Create Account", driver.getTitle());
+    }
+
+    @Test
+    public void testUsernameFieldPresence() {
+        WebElement usernameField = wait.until(ExpectedConditions.presenceOfElementLocated(
+            By.cssSelector("input[name='newUsername']")));
+        Assertions.assertTrue(usernameField.isDisplayed());
+    }
+
+    @Test
+    public void testEmailFieldPresence() {
+        WebElement emailField = wait.until(ExpectedConditions.presenceOfElementLocated(
+            By.cssSelector("input[name='email']")));
+        Assertions.assertTrue(emailField.isDisplayed());
+    }
+
+    @Test
+    public void testPasswordFieldPresence() {
+        WebElement passwordField = wait.until(ExpectedConditions.presenceOfElementLocated(
+            By.cssSelector("input[name='newPassword']")));
+        Assertions.assertTrue(passwordField.isDisplayed());
+    }
+
+    @Test
+    public void testConfirmPasswordFieldPresence() {
+        WebElement confirmPasswordField = wait.until(ExpectedConditions.presenceOfElementLocated(
+            By.cssSelector("input[name='confirmPassword']")));
+        Assertions.assertTrue(confirmPasswordField.isDisplayed());
+    }
+
+    @Test
+    public void testCreateAccountButtonFunctionality() {
+        WebElement createButton = wait.until(ExpectedConditions.elementToBeClickable(
+            By.id("btnCreate")));
+        createButton.click();
+        
+        // Verify some expected behavior after account creation
+        WebElement successMessage = wait.until(ExpectedConditions.presenceOfElementLocated(
+            By.id("successMessage")));
+        Assertions.assertTrue(successMessage.isDisplayed());
+    }
+
+    @Test
+    public void testBackToLoginLink() {
+        WebElement backToLoginLink = wait.until(ExpectedConditions.elementToBeClickable(
+            By.linkText("Voltar para o login")));
+        backToLoginLink.click();
+        
+        // Verify navigation back to login page
+        wait.until(ExpectedConditions.urlContains("index.html"));
+        Assertions.assertTrue(driver.getCurrentUrl().contains("index.html"));
+    }
+
+    @AfterEach
+    public void tearDown() {
+        if (driver != null) {
+            driver.quit();
+        }
+    }
+}

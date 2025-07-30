@@ -1,0 +1,15 @@
+Type,Count
+Number of Errors,236
+org.openqa.selenium.NoSuchElementException,118
+org.openqa.selenium.TimeoutException,76
+org.openqa.selenium.remote.NoSuchDriverException,20
+java.lang.NullPointerException,6
+org.openqa.selenium.ElementClickInterceptedException,6
+org.openqa.selenium.ElementNotInteractableException,3
+org.openqa.selenium.InvalidArgumentException,2
+org.openqa.selenium.StaleElementReferenceException,2
+java.util.NoSuchElementException,1
+org.openqa.selenium.NoSuchSessionException,1
+org.openqa.selenium.support.ui.UnexpectedTagNameException,1
+Number of Failures,80
+org.opentest4j.AssertionFailedError,80
